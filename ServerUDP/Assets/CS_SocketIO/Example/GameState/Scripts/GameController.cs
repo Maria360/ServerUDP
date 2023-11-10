@@ -30,6 +30,8 @@ public class GameController : MonoBehaviour
         GameObject.Find("PanelConnect").SetActive(false);
         GameContainer.SetActive(true);
 
+        
+
         foreach (Player player in state.Players)
         {
             InstantiatePlayer(player);
@@ -53,6 +55,8 @@ public class GameController : MonoBehaviour
         playerGameObject.GetComponent<GamePlayer>().Id = player.Id;
         playerGameObject.GetComponent<GamePlayer>().Username = player.Id;
         playerGameObject.GetComponent<GamePlayer>().usertext.text = player.Username;
+       
+        playerGameObject.GetComponent<GamePlayer>().spriteRenderer.color = new Color(player.R, player.G,player.B);
         
 
         PlayersToRender[player.Id] = playerGameObject.transform;
@@ -83,6 +87,7 @@ public class GameController : MonoBehaviour
                 else
                 {
                     InstantiatePlayer(player);
+                    
                 }
               
             }
@@ -97,6 +102,8 @@ public class GameController : MonoBehaviour
                 if (CoinsToRender.ContainsKey(coin.Id))
                 {
                     CoinsToRender[coin.Id].position = new Vector2(coin.x, coin.y);
+                    
+                    CoinsToRender[coin.Id].rotation = Quaternion.Euler(0,0,coin.angle);
                 }
                 else
                 {

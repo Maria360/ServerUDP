@@ -94,6 +94,9 @@ public class Player
     public int y;
     public int Score;
     public float Radius;
+    public int R;
+    public int G;
+    public int B;
 }
 
 [Serializable]
@@ -102,4 +105,5 @@ public class Coin
     public string Id;
     public int x;
     public int y;
+    public float angle;
 }
