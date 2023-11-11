@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject CoinPrefab;
 
+    [SerializeField] Sprite[] playerSprites;
+
     private GameState State;
     private Dictionary<string, Transform> PlayersToRender;
     private Dictionary<string, Transform> CoinsToRender;
@@ -55,8 +57,10 @@ public class GameController : MonoBehaviour
         playerGameObject.GetComponent<GamePlayer>().Id = player.Id;
         playerGameObject.GetComponent<GamePlayer>().Username = player.Id;
         playerGameObject.GetComponent<GamePlayer>().usertext.text = player.Username;
-       
-        playerGameObject.GetComponent<GamePlayer>().spriteRenderer.color = new Color(player.R, player.G,player.B);
+        //playerGameObject.GetComponent<GamePlayer>().spriteRenderer.color = new Color(player.R, player.G,player.B);
+
+        int randomIndex = Random.Range(0, playerSprites.Length);
+        playerGameObject.GetComponent<SpriteRenderer>().sprite = playerSprites[randomIndex];
         
 
         PlayersToRender[player.Id] = playerGameObject.transform;
