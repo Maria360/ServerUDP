@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Random = UnityEngine.Random;
+using UnityEngine.UIElements;
 
 public class GameController : MonoBehaviour
 {
@@ -52,16 +53,20 @@ public class GameController : MonoBehaviour
     private void InstantiatePlayer(Player player)
     {
         GameObject playerGameObject = Instantiate(PlayerPrefab, PlayersContainer);
+
+        RectTransform playerRectTransform = playerGameObject.GetComponent<RectTransform>();
+
         playerGameObject.transform.position = new Vector2(player.x, player.y);
-        //playerGameObject.transform.localScale = new Vector2(player.Radius, player.Radius);
         playerGameObject.GetComponent<GamePlayer>().Id = player.Id;
         playerGameObject.GetComponent<GamePlayer>().Username = player.Id;
         playerGameObject.GetComponent<GamePlayer>().usertext.text = player.Username;
-        //playerGameObject.GetComponent<GamePlayer>().spriteRenderer.color = new Color(player.R, player.G,player.B);
 
         int randomIndex = Random.Range(0, playerSprites.Length);
         playerGameObject.GetComponent<SpriteRenderer>().sprite = playerSprites[randomIndex];
+
         
+
+
 
         PlayersToRender[player.Id] = playerGameObject.transform;
     }
@@ -87,6 +92,8 @@ public class GameController : MonoBehaviour
                 if (PlayersToRender.ContainsKey(player.Id))
                 {
                     PlayersToRender[player.Id].position = new Vector2(player.x, player.y);
+                    float scale = player.Radius / 1f;
+                    PlayersToRender[player.Id].localScale = new Vector2(scale, scale);//here
                 }
                 else
                 {

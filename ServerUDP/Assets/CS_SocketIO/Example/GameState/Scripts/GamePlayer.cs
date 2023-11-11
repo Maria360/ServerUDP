@@ -13,7 +13,7 @@ public class GamePlayer : MonoBehaviour
 
     private void Start()
     {
-        usertext = GetComponent<TMP_Text>();
+        usertext = GetComponentInChildren<TMP_Text>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         
         
