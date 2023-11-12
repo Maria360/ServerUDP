@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Linq;
 using Random = UnityEngine.Random;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -61,6 +62,11 @@ public class GameController : MonoBehaviour
         playerGameObject.GetComponent<GamePlayer>().Username = player.Id;
         playerGameObject.GetComponent<GamePlayer>().usertext.text = player.Username;
 
+        //playerGameObject.GetComponent<GamePlayer>().Score = player.Score;
+        //playerGameObject.GetComponent<GamePlayer>().scoreText.text = player.Score.ToString();
+
+
+
         int randomIndex = Random.Range(0, playerSprites.Length);
         playerGameObject.GetComponent<SpriteRenderer>().sprite = playerSprites[randomIndex];
 
@@ -94,6 +100,11 @@ public class GameController : MonoBehaviour
                     PlayersToRender[player.Id].position = new Vector2(player.x, player.y);
                     float scale = player.Radius / 1f;
                     PlayersToRender[player.Id].localScale = new Vector2(scale, scale);//here
+
+                    PlayersToRender[player.Id].GetComponent<GamePlayer>().scoreText.text = player.Score.ToString();
+                    
+
+
                 }
                 else
                 {
