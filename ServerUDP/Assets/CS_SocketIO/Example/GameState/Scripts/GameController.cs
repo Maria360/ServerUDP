@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     private Transform PlayersContainer;
     [SerializeField]
     private Transform CoinsContainer;
+    [SerializeField]
+    private TextMeshProUGUI textAxis;
 
     [SerializeField]
     private GameObject PlayerPrefab;
@@ -25,7 +27,7 @@ public class GameController : MonoBehaviour
 
     private GameState State;
     private Dictionary<string, Transform> PlayersToRender;
-    private Dictionary<string, Transform> CoinsToRender;
+    private Dictionary<string, Transform> CoinsToRender;  
     internal void StartGame(GameState state)
     {
         PlayersToRender = new Dictionary<string, Transform>();
@@ -57,7 +59,7 @@ public class GameController : MonoBehaviour
 
         RectTransform playerRectTransform = playerGameObject.GetComponent<RectTransform>();
 
-        playerGameObject.transform.position = new Vector2(player.x, player.y);
+        playerGameObject.transform.position = new Vector2(player.x, 200);
         playerGameObject.GetComponent<GamePlayer>().Id = player.Id;
         playerGameObject.GetComponent<GamePlayer>().Username = player.Id;
         playerGameObject.GetComponent<GamePlayer>().usertext.text = player.Username;
@@ -110,6 +112,7 @@ public class GameController : MonoBehaviour
                 {
                     InstantiatePlayer(player);
                     
+                    
                 }
               
             }
@@ -130,6 +133,7 @@ public class GameController : MonoBehaviour
                 else
                 {
                     InstantiateCoin(coin);
+
                 }
             }
             var coinsToDelete = CoinsToRender.Where(item => !State.Coins.Any(coin => coin.Id == item.Key)).ToList();
@@ -140,6 +144,22 @@ public class GameController : MonoBehaviour
                 CoinsToRender.Remove(coinItem.Key);
             }
 
+        }
+        if (Input.GetKeyDown("w"))
+        {
+            textAxis.text = "W";
+        }
+        if (Input.GetKeyDown("a"))
+        {
+            textAxis.text = "A";
+        }
+        if (Input.GetKeyDown("s"))
+        {
+            textAxis.text = "S";
+        }
+        if (Input.GetKeyDown("d"))
+        {
+            textAxis.text = "D";
         }
     }
     private void InstantiateCoin(Coin coin)
